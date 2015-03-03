@@ -1,0 +1,23 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /app
+permissions:
+  - object: /app
+    pattern: "**"
+    owner: ubuntu
+    group: ubuntu
+  - object: /
+    pattern: "app"
+    owner: ubuntu
+    group: ubuntu
+hooks:
+  BeforeInstall:
+    - location: hooks/before_install_root.sh
+      runas: root
+  AfterInstall:
+    - location: hooks/after_install.sh
+      runas: ubuntu
+  ApplicationStart:
+    - location: hooks/application_start.sh
